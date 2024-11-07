@@ -1,0 +1,58 @@
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.titleWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.membersList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.memberItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #F8FAFC;
+  border-radius: 8px;
+}
+
+.memberImage {
+  border-radius: 50%;
+}
+
+.memberName {
+  font-weight: 500;
+  color: #111827;
+}
+
+.primaryBadge {
+  background-color: #EEF2FF;
+  color: #0040FF;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+} 

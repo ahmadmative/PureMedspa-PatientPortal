@@ -1,0 +1,51 @@
+.mainContent {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto; */
+}
+
+.leftColumn,
+.rightColumn {
+  flex: 1;
+  /* display: flex;
+  flex-direction: column;
+  gap: 24px; */
+}
+
+/* Common card styles that will be used across components */
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+  }
+  
+  .leftColumn,
+  .rightColumn {
+    width: 100%;
+  }
+} 

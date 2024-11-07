@@ -1,0 +1,58 @@
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.titleWithIcon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #111827;
+}
+
+.consultationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.consultationItem {
+  padding: 16px;
+  background-color: #F9FAFB;
+  border-radius: 8px;
+}
+
+.condition {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.consultationDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doctorInfo, .timeInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6B7280;
+  font-size: 14px;
+} 

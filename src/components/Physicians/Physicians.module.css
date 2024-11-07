@@ -1,0 +1,60 @@
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.titleWithIcon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #111827;
+}
+
+.physiciansList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.physicianItem {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #F9FAFB;
+}
+
+.physicianInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.physicianImage {
+  border-radius: 50%;
+}
+
+.physicianDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.physicianName {
+  font-weight: 500;
+  color: #111827;
+}
+
+.specialty {
+  font-size: 14px;
+  color: #6B7280;
+} 

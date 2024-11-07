@@ -1,0 +1,107 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-field {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 100px;
+  font-size: 1rem;
+  background: #F9FAFB;
+  transition: all 0.3s ease;
+  color: #171717;
+  margin-bottom: 10px;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #0037FF;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.input-field::placeholder {
+  color: #9CA3AF;
+}
+
+.input-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-button {
+  background: #0037FF;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.custom-button:hover {
+  background: #002acc;
+}
+
+.custom-button.full-width {
+  width: 100%;
+}
+
+/* Add these new rules to handle autofill styles */
+.input-field:-webkit-autofill,
+.input-field:-webkit-autofill:hover,
+.input-field:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #171717 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

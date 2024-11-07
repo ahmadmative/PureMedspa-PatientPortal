@@ -1,0 +1,54 @@
+.card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.profileInfo {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.profileImage {
+  border-radius: 50%;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.basicInfo {
+  color: #6B7280;
+  font-size: 14px;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #4B5563;
+  font-size: 14px;
+} 

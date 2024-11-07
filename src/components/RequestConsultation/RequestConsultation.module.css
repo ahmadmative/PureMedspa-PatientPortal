@@ -1,0 +1,789 @@
+.container {
+  padding: 2rem;
+  padding-right: 40px;
+  padding-left: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headerText h1 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  color: #000;
+}
+
+.headerText p {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: #666;
+  margin: 5px 0;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rightSection span {
+  color: #000;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.profileImage {
+  border-radius: 50%;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem; */
+}
+
+.column h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: #F8F8F8;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.radioLabel:hover {
+  background-color: #F0F0F0;
+}
+
+.radioText {
+  font-size: 0.9375rem;
+  color: #333;
+  flex: 1;
+}
+
+.radioLabel input[type="radio"],
+.radioLabel input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #E0E0E0;
+  border-radius: 50%;
+  margin-top: 2px;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.radioLabel input[type="radio"]:checked,
+.radioLabel input[type="checkbox"]:checked {
+  border-color: #0040FF;
+  background-color: white;
+}
+
+.radioLabel input[type="radio"]:checked::after,
+.radioLabel input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: #0040FF;
+  border-radius: 50%;
+}
+
+.radioLabel input[type="radio"]:hover:not(:checked),
+.radioLabel input[type="checkbox"]:hover:not(:checked) {
+  border-color: #BDBDBD;
+}
+
+.learnMore {
+  color: blue;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancelButton {
+  padding: 0.75rem 2rem;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  background: white;
+  cursor: pointer;
+  color: #000;
+}
+
+.continueButton {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 25px;
+  background: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.continueButton:hover {
+  background: darkblue;
+}
+
+.symptomsSection {
+  width: 100%;
+  padding: 1rem;
+}
+
+.symptoms {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.checkboxLabel:hover {
+  background-color: #f5f5f5;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #E0E0E0;
+  border-radius: 50%;
+  margin-top: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkboxLabel input[type="checkbox"]:checked {
+  border-color: #0040FF;
+  background-color: white;
+}
+
+.checkboxLabel input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: #0040FF;
+  border-radius: 50%;
+}
+
+.additionalInfo {
+  margin-top: 2rem;
+}
+
+.additionalInfoTitle {
+  margin-top: 2rem;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 1rem;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  background-color: #F8F8F8;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: #333;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #0040FF;
+  background-color: #FFFFFF;
+}
+
+.textarea::placeholder {
+  color: #666;
+}
+
+.uploadSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  gap: 2rem;
+  padding: 20px 200px 20px 200px;
+}
+
+.emergencyAlert {
+  width: 100%;
+  padding: 1rem;
+  background-color: #FFE5E5;
+  color: #FF4444;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.uploadContent {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.uploadContent h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.uploadContent p {
+  color: #666;
+  margin: 0;
+}
+
+.uploadButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.uploadButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border: 1px solid #0040FF;
+  border-radius: 25px;
+  background: white;
+  color: #0040FF;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.uploadButton:hover {
+  background-color: #F5F8FF;
+}
+
+.continueButton {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 25px;
+  background: #0040FF;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.continueButton:hover {
+  background: #0033CC;
+}
+
+.continueButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.conditionsColumns {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+}
+
+.fullWidthColumn {
+  width: 100%;
+}
+
+.fullWidthColumn h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.pharmacyAlert {
+  background-color: #E8EEFF;
+  color: #0046FF;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.pharmacyContent {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pharmacyList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 40vh;
+  overflow-y: auto;
+  padding-right: 16px;
+  margin: 16px 0;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.pharmacyItem {
+  padding: 16px;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.pharmacyItem:hover {
+  border-color: #0046FF;
+  background-color: #F5F8FF;
+}
+
+.pharmacyItem.selected {
+  border-color: #0046FF;
+  background-color: #F5F8FF;
+}
+
+.pharmacyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pharmacyHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.selectedIndicator {
+  background-color: #0046FF;
+  border-radius: 50%;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectedIndicator img {
+  filter: brightness(0) invert(1);
+}
+
+.pharmacyPhone {
+  color: #0046FF;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.pharmacyAddress {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.distance {
+  font-size: 12px;
+  color: #666;
+  margin-top: 8px;
+}
+
+/* Make the scrollbar thinner and more modern */
+.pharmacyList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.pharmacyList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.pharmacyList::-webkit-scrollbar-thumb {
+  background: #0046FF;
+  border-radius: 2px;
+}
+
+.pharmacyList::-webkit-scrollbar-thumb:hover {
+  background: #003ACC;
+}
+
+.pharmacyContent h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.pharmacyPhone {
+  color: #000;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+.pharmacyAddress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.pharmacyAddress span {
+  color: #000;
+}
+
+.pharmacyButtons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.changePharmacyButton {
+  padding: 12px 24px;
+  border: 2px solid #0046FF;
+  background: transparent;
+  color: #0046FF;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.changePharmacyButton:hover {
+  background: #E8EEFF;
+}
+
+.continueButton {
+  padding: 12px 24px;
+  background: #0046FF;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.continueButton:hover {
+  background: #003ACC;
+}
+
+.continueButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.doctorAlert {
+  background-color: #E8EEFF;
+  color: #0046FF;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.paymentContent {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pharmacySection {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.consultationType {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.sectionIcon,
+.typeIcon {
+  padding: 8px;
+  background: #F5F5F5;
+  border-radius: 8px;
+}
+
+.turnAroundNote {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.phoneSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phoneSection h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.phoneAlert {
+  background-color: #E8EEFF;
+  color: #0046FF;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.phoneInput {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 100px;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.3s ease;
+  color: #171717;
+  padding-right: 35px !important;
+  margin-bottom: 10px;
+}
+
+.medicalNoteCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #000;
+}
+
+.medicalNoteCheckbox input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #E0E0E0;
+  border-radius: 50%;
+  margin-top: 2px;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.medicalNoteCheckbox input:checked {
+    border-color: #0040FF;
+    background-color: white;
+  }
+
+.medicalNoteCheckbox input:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: #0040FF;
+  border-radius: 50%;
+}
+
+.medicalNoteCheckbox input:hover:not(:checked) {
+  border-color: #BDBDBD;
+}
+
+.paymentButtons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.cancelButton {
+  padding: 12px 48px;
+  border: 2px solid #0046FF;
+  background: transparent;
+  color: #0046FF;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submitButton {
+  padding: 12px 48px;
+  background: #0046FF;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background: #E8EEFF;
+}
+
+.submitButton:hover {
+  background: #003ACC;
+}
+
+.pharmacySection h3 {
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.pharmacySection h2 {
+  color: #000;
+  font-weight: 600;
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.selectedIndicator {
+  /* position: absolute; */
+  right: 16px;
+  top: 16px;
+}
+
+.searchForm {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.formRow {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.formGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formGroup label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.input, .select {
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    background-color: white;
+}
+
+.select {
+    background-color: white;
+    color: #666;
+}
+
+.input:focus, .select:focus {
+    outline: none;
+    border-color: #0046FF;
+}
+
+.searchButton {
+    background: #0046FF;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.searchButton:hover {
+    background: #003ACC;
+}
+
+/* Update existing pharmacyList style */
+.pharmacyList {
+    height: 40vh;
+    margin-top: 0;
+}
+
+.input[type="tel"] {
+    font-family: monospace; /* Helps maintain consistent spacing */
+    letter-spacing: 0.5px;
+}
