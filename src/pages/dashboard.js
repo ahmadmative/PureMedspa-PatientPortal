@@ -32,7 +32,7 @@ function Dashboard() {
           <div style={{height: '24px'}}/>
           <Pharmacy patientId={user?.patient_id} />
           <div style={{height: '24px'}}/>
-          <Physicians />
+          <Physicians patientId={user?.patient_id}/>
         </div>
         <div className={styles.rightColumn}>
           <Profile />

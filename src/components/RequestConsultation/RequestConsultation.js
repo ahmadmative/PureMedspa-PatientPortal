@@ -305,6 +305,13 @@ function RequestConsultation() {
   };
 
   const handlePaymentSubmit = async () => {
+    // Add phone validation
+    const phoneDigits = phoneNumber.replace(/\D/g, '');
+    if (phoneDigits.length !== 10) {
+      alert('Please enter a valid 10-digit phone number');
+      return;
+    }
+
     const user = authService.getCurrentUser();
     try {
       if (!phoneNumber) {
@@ -431,9 +438,12 @@ function RequestConsultation() {
                 </div>
                 <input
                   type="tel"
-                  placeholder="Phone Number"
+                  placeholder="(XXX) XXX-XXXX"
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onChange={(e) => {
+                    const formattedNumber = formatPhoneNumber(e.target.value);
+                    setPhoneNumber(formattedNumber);
+                  }}
                   className={styles.phoneInput}
                 />
               </div>
@@ -561,9 +571,7 @@ function RequestConsultation() {
                     </button>
                   </form>
 
-                  {loadingPharmacy ? (
-                    <div className={styles.loading}>Loading pharmacy details...</div>
-                  ) : pharmacies.length > 0 ? (
+                  {pharmacies.length > 0 ? (
                     <div className={styles.pharmacyList}>
                       {pharmacies.map((pharmacy) => (
                         <div 
@@ -606,7 +614,7 @@ function RequestConsultation() {
                       ))}
                     </div>
                   ) : (
-                    <div className={styles.error}>No pharmacies found</div>
+                    <div style={{color: '#808080'}}>No pharmacies found</div>
                   )}
                 </>
               ) : selectedPharmacy && (
