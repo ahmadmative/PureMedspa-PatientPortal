@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import styles from '../styles/Login.module.css';
-import bgImage from '../../public/assets/images/bg.png';
+import bgImage from '../../public/assets/images/bg.jpeg';
 import logoImage from '../../public/assets/images/logo.png';
 import axios from 'axios';
 
@@ -98,7 +98,7 @@ export default function ForgotPassword() {
         height={1200}
         priority
       />
-      <div className={styles.overlay} />
+      {/* <div className={styles.overlay} /> */}
       <div className={styles.logoContainer}>
         <Image
           src={logoImage}

@@ -15,8 +15,18 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 // Add this constant for the patient ID storage key
 const PATIENT_ID_KEY = 'patient_id';
 
-// Add Stripe public key (you'll need to get this from your environment variables)
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+// Add error handling for missing Stripe key
+const getStripePromise = () => {
+  const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  if (!key) {
+    console.error('Stripe publishable key is missing. Please check your environment variables.');
+    return null;
+  }
+  return loadStripe(key);
+};
+
+// Initialize Stripe with error handling
+const stripePromise = getStripePromise();
 
 // Create a wrapper component
 function SignupForm() {
@@ -672,6 +682,10 @@ function SignupForm() {
 
 // Main component that wraps SignupForm with Elements
 export default function Payment() {
+    if (!stripePromise) {
+        return <div>Unable to load payment system. Please try again later.</div>;
+    }
+
     return (
         <Elements stripe={stripePromise}>
             <SignupForm />
