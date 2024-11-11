@@ -5,7 +5,7 @@ export const patientService = {
     createPatient: async (patientData) => {
         try {
             const token = await tokenService.getAuthToken();
-            console.log('Token:', token);
+            console.log('Retrieved new token from patient.service Token:', token);
             const response = await axios.post('/api/patient/createpatient', patientData, {
                 headers: {
                     'Authorization': `Bearer ${token}`

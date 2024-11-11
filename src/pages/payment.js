@@ -234,7 +234,7 @@ function SignupForm() {
                         console.log('Payment Details for API:', paymentDetails);
                         setPaymentResponse(paymentDetails);
 
-                        await createPatient();
+                        await createPatient(paymentDetails);
 
                         // router.push('/');
                     }
@@ -253,7 +253,7 @@ function SignupForm() {
     };
 
     // Move patient creation logic to separate function
-    const createPatient = async () => {
+    const createPatient = async (paymentDetails) => {
         try {
             const patientData = {
                 ID: 0,
@@ -290,7 +290,7 @@ function SignupForm() {
                 formData2.append('zipcode', formData.zipcode);
                 formData2.append('email', formData.email);
                 formData2.append('patient_id', response.toString());
-                formData2.append('payment_id', paymentResponse?.payment_id || '');
+                formData2.append('payment_id', paymentDetails?.payment_id || '');
                 formData2.append('amount', data?.Subscription_plan.price || '');
                 formData2.append('plan_id', data?.Subscription_plan.id || '');
 
