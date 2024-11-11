@@ -10,7 +10,7 @@ import { authService } from '../../api/services/auth.service';
 import { allergyService } from '@components/api/services/allergy.service';
 
 
-const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
+const HealthHistoryConsultation = ({ currentMedications, onComplete, continueFalse }) => {
     const [showMedicationForm, setShowMedicationForm] = useState(false);
     const [showAllergyForm, setShowAllergyForm] = useState(false);
     const [showPastMedicalHistoryForm, setShowPastMedicalHistoryForm] = useState(false);
@@ -47,6 +47,9 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
 
     const [renderMedications, setRenderMedications] = useState(false);
     const [renderAllergies, setRenderAllergies] = useState(false);
+
+    const [deletingMedicationId, setDeletingMedicationId] = useState(null);
+    const [deletingAllergyId, setDeletingAllergyId] = useState(null);
 
     useEffect(() => {
         const delayMedications = setTimeout(() => setRenderMedications(true), 500); // 500ms delay
@@ -244,7 +247,7 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
 
         } catch (error) {
             console.error('Error saving allergy:', error);
-            alert('Failed to save allergy');
+            alert('Duplicate allergy');
         } finally {
             setLoadingSaveAllergy(false);
         }
@@ -278,6 +281,8 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
 
     const handleDeleteMedication = async (medication) => {
         try {
+            setDeletingMedicationId(medication.Id);
+
             const user = authService.getCurrentUser();
             if (!user) {
                 throw new Error('User not found');
@@ -302,10 +307,13 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
         } catch (error) {
             console.error('Error deleting medication:', error);
             alert('Failed to delete medication');
+        } finally {
+            setDeletingMedicationId(null);
         }
     };
 
     const handleDeleteAllergy = async (allergy) => {
+        setDeletingAllergyId(allergy.AllergyId);
         console.log('allergy:', allergy);
         try {
             const user = authService.getCurrentUser();
@@ -329,6 +337,8 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
             fetchAllergies();
         } catch (error) {
             console.error('Error deleting allergy:', error);
+        } finally {
+            setDeletingAllergyId(null);
         }
     };
 
@@ -357,17 +367,23 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
                                 medications.map((med) => (
                                     <div key={med.Id} className={styles.medicationItem}>
                                         <span>{med.Drug.MedicationName} - {med.Drug.Strength}</span>
-                                        <button
-                                            className={styles.deleteButton}
-                                            onClick={() => handleDeleteMedication(med)}
-                                        >
-                                            <Image
-                                                src="/assets/icons/delete-blue.png"
-                                                alt="Delete"
-                                                width={20}
-                                                height={20}
-                                            />
-                                        </button>
+                                        {deletingMedicationId === med.Id ? (
+                                            <div className={styles.spinnerContainer}>
+                                                <div className={styles.spinner}></div>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                className={styles.deleteButton}
+                                                onClick={() => handleDeleteMedication(med)}
+                                            >
+                                                <Image
+                                                    src="/assets/icons/delete-blue.png"
+                                                    alt="Delete"
+                                                    width={20}
+                                                    height={20}
+                                                />
+                                            </button>
+                                        )}
                                     </div>
                                 ))
                             ) : (
@@ -437,12 +453,18 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
                                                 className={styles.deleteButton}
                                                 onClick={() => handleDeleteAllergy(allergy)}
                                             >
-                                                <Image
-                                                    src="/assets/icons/delete-blue.png"
-                                                    alt="Delete"
-                                                    width={20}
-                                                    height={20}
-                                                />
+                                                {deletingAllergyId === allergy.AllergyId ? (
+                                                    <div className={styles.spinnerContainer}>
+                                                        <div className={styles.spinner}></div>
+                                                    </div>
+                                                ) : (
+                                                    <Image
+                                                        src="/assets/icons/delete-blue.png"
+                                                        alt="Delete"
+                                                        width={20}
+                                                        height={20}
+                                                    />
+                                                )}
                                             </button>
                                         </div>
                                     ))
@@ -623,9 +645,11 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
                 </div> */}
 
             </div>
-            <div className={styles.navigationButtons}>
-                <Button onClick={handleComplete} className={styles.saveButton} width="15%">Continue</Button>
-            </div>
+            {!continueFalse && (
+                <div className={styles.navigationButtons}>
+                    <Button onClick={handleComplete} className={styles.saveButton} width="15%">Continue</Button>
+                </div>
+            )}
             {/* <div className={styles.footer}>
                 <button
                     className={styles.continueButton}

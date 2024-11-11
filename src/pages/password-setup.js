@@ -15,36 +15,49 @@ export default function PasswordSetup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [decodedToken, setDecodedToken] = useState('');
   const router = useRouter();
   const { token } = router.query;
   const [errors, setErrors] = useState('');
 
   useEffect(() => {
-    // Only redirect if router is ready and there's no token
-    if (router.isReady && !token) {
+    // Only process token if router is ready and token exists
+    if (router.isReady && token) {
+      try {
+        // Decode the token if it's URI encoded
+        const decoded = decodeURIComponent(token);
+        setDecodedToken(decoded);
+        console.log('Decoded token:', decoded);
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        setDecodedToken(token); // Use original token if decoding fails
+      }
+    } else if (router.isReady && !token) {
       router.push('/forgot-password');
     }
-    
-    // You can also validate the token here
-    // validateToken(token);
   }, [token, router, router.isReady]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // First validate passwords match
     if (password !== confirmPassword) {
-      // You might want to add state for errors
       setErrors('Passwords do not match');
       return;
     }
 
-    // Create FormData
+    if (!decodedToken) {
+      setErrors('Invalid or missing token');
+      return;
+    }
+
+    // Create FormData with decoded token
     const formData = new FormData();
-    formData.append('token', token);
+    formData.append('token', decodedToken);
     formData.append('password', password);
 
     try {
+      console.log('Submitting with token:', decodedToken); // Debug log
+
       const response = await axios.post(
         'https://alturahealth.webjerky.com/api/password-setup',
         formData,
@@ -62,8 +75,7 @@ export default function PasswordSetup() {
       }
     } catch (error) {
       console.error('Password Reset Error:', error);
-      // You might want to add state for errors
-      setErrors('Password reset failed. Please try again.');
+      setErrors(error.response?.data?.message || 'Password reset failed. Please try again.');
     }
   };
 

@@ -7,7 +7,7 @@ const HealthHistoryPage = () => {
   return (
     <DashboardLayout>
       <div className={styles.mainContent}>
-          <HealthHistoryConsultation />
+          <HealthHistoryConsultation continueFalse={true} />
       </div>
     </DashboardLayout>
   );

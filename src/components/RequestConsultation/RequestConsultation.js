@@ -94,6 +94,14 @@ function RequestConsultation() {
     }
   };
 
+  const getPreferredPharmacy = async () => {
+    const user = authService.getCurrentUser();
+    const data = await pharmacyService.getPreferredPharmacy(parseInt(user.patient_id));
+    setPreferredPharmacy(data);
+    setPharmacies(data || []);
+    console.log("preferredPharmacy in RequestConsultation.js", data);
+  };
+
   const handleSearch = async (e) => {
     const user = authService.getCurrentUser();
     e.preventDefault();
@@ -250,7 +258,7 @@ function RequestConsultation() {
   const handleContinue = () => {
     if (currentStep === 'conditions' && selectedCondition) {
       setCurrentStep('symptoms');
-    } else if (currentStep === 'symptoms') {
+    } else if (currentStep === 'symptoms' && selectedSymptoms.length > 0) {
       setCurrentStep('upload');
     }
   };
@@ -275,6 +283,7 @@ function RequestConsultation() {
   const handleHealthHistoryComplete = () => {
     setShowHealthHistory(false);
     setShowPharmacy(true);
+    // getPreferredPharmacy();
   };
 
   const [savingPharmacy, setSavingPharmacy] = useState(false);
@@ -344,6 +353,7 @@ function RequestConsultation() {
       setShowPayment(false);
       setPhoneNumber('');
       setRequestMedicalNote(false);
+      setCurrentStep('conditions');
       
       // You can redirect to a success page or show a success message
       alert('Consultation request submitted successfully');
