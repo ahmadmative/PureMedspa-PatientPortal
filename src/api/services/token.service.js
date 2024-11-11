@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+// const BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 const getTokenFromServer = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/api/Token`);
+        const response = await axios.get(`/api/Token`);
         console.log('got response from token =>>>>>>>>>>>>>>>>>>', response.data.access_token);
         return response.data.access_token;
     } catch (error) {
