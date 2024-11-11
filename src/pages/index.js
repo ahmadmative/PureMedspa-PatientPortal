@@ -8,6 +8,7 @@ import bgImage from '../../public/assets/images/bg.png';
 import logoImage from '../../public/assets/images/logo.png';
 import Link from 'next/link';
 import { authService } from '../api/services/auth.service';
+import { tokenService } from '../api/services/token.service';
 
 
 export default function Login() {
@@ -25,6 +26,7 @@ export default function Login() {
 
     try {
       await authService.login(email, password);
+      await tokenService.getAuthToken();
       router.push('/dashboard');
     } catch (error) {
       setError(error.response?.data?.message || 'Failed to sign in');
@@ -93,7 +95,7 @@ export default function Login() {
             {loading ? 'Signing in...' : 'Sign In'}
           </Button>
           <div className={styles.register}>
-            <p>Don't have any account? <Link href="/signup">Sign up</Link></p>
+            <p>Don't have any account? <Link href="https://www.puremedspaga.com/">Sign up</Link></p>
           </div>
         </form>
       </div>

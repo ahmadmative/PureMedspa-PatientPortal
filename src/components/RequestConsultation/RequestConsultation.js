@@ -370,9 +370,9 @@ function RequestConsultation() {
       return (
         <div className={styles.fullWidthColumn}>
           <div className={styles.uploadSection}>
-            <div className={styles.doctorAlert}>
+            {/* <div className={styles.doctorAlert}>
               This consultation is assigned to Dr. Narendra Garg
-            </div>
+            </div> */}
 
             <div className={styles.paymentContent}>
               <div className={styles.pharmacySection}>

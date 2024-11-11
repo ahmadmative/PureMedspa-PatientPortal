@@ -1,9 +1,15 @@
 import axios from 'axios';
+import { authService } from './auth.service';
 export const medicationService = {
     
     searchMedications: async (searchTerm) => {
         try {
-            const response = await axios.get(`/api/medication/search?Name=${searchTerm}`);
+            const token = authService.getAccessToken();
+            const response = await axios.get(`/api/medication/search?Name=${searchTerm}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             return response.data;
         } catch (error) {
             console.error('Error in medication search:', error);
@@ -13,7 +19,12 @@ export const medicationService = {
 
     getCurrentMedications: async (patientId) => {
         try {
-            const response = await axios.get(`/api/patient/Medication?patientId=${patientId}`);
+            const token = authService.getAccessToken();
+            const response = await axios.get(`/api/patient/Medication?patientId=${patientId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             return response.data;
         } catch (error) {
             console.error('Error getting current medications:', error);
@@ -23,7 +34,12 @@ export const medicationService = {
 
     deleteCurrentMedication: async (medicationData) => {
         try {
-            const response = await axios.post(`/api/patient/DeleteCurrentMedication`, medicationData);
+            const token = authService.getAccessToken();
+            const response = await axios.post(`/api/patient/DeleteCurrentMedication`, medicationData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             return response.data;
         } catch (error) {
             console.error('Error removing medication:', error);
@@ -33,7 +49,12 @@ export const medicationService = {
 
     saveCurrentMedication: async (medicationData) => {
         try {
-            const response = await axios.post(`/api/patient/currentMedication`, medicationData);
+            const token = authService.getAccessToken();
+            const response = await axios.post(`/api/patient/currentMedication`, medicationData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             return response.data;
         } catch (error) {
             console.error('Error saving medication:', error);

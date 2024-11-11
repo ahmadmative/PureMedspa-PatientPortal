@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { title: 'Dashboard', icon: '/assets/icons/dashboardIcon.png', activeIcon: '/assets/icons/dashboardIconBlue.png', path: '/dashboard' },
-    { title: 'Add Spouse', icon: '/assets/icons/addSpouseIcon.png', activeIcon: '/assets/icons/addSpouseIconBlue.png', path: '/add-spouse' },
+    // { title: 'Add Spouse', icon: '/assets/icons/addSpouseIcon.png', activeIcon: '/assets/icons/addSpouseIconBlue.png', path: '/add-spouse' },
     { title: 'Request Consultation', icon: '/assets/icons/requestConsultationIcon.png', activeIcon: '/assets/icons/requestConsultationIconBlue.png', path: '/consultation' },
     { title: 'Health History', icon: '/assets/icons/healthHistoryIcon.png', activeIcon: '/assets/icons/healthHistoryIconBlue.png', path: '/health-history' },
     { title: 'Edit Profile', icon: '/assets/icons/settingsIcon.png', activeIcon: '/assets/icons/settingsIconBlue.png', path: '/edit-profile' },

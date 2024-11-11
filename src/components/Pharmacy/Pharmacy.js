@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './Pharmacy.module.css';
 import { pharmacyService } from '../../api/services/pharmacy.service';
+import { authService } from '../../api/services/auth.service';
 
-const Pharmacy = ({ patientId }) => {
+
+const Pharmacy = () => {
     const [pharmacyInfo, setPharmacyInfo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -11,7 +13,8 @@ const Pharmacy = ({ patientId }) => {
     useEffect(() => {
         const fetchPharmacy = async () => {
             try {
-                const data = await pharmacyService.getPreferredPharmacy(patientId);
+                const user = authService.getCurrentUser();
+                const data = await pharmacyService.getPreferredPharmacy(user.patient_id);
                 setPharmacyInfo(data);
             } catch (err) {
                 setError('Failed to load pharmacy information');
@@ -20,11 +23,8 @@ const Pharmacy = ({ patientId }) => {
                 setLoading(false);
             }
         };
-
-        if (patientId) {
-            fetchPharmacy();
-        }
-    }, [patientId]);
+        fetchPharmacy();
+    }, []);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;

@@ -45,47 +45,47 @@ const HealthHistory = ({ patientId }) => {
         router.push('/health-history');
     };
 
-    const formatLifestyleSection = (data) => {
-        if (!data) return null;
+    // const formatLifestyleSection = (data) => {
+    //     if (!data) return null;
 
-        return (
-            <div className={styles.lifestyleSection}>
-                <h2 className={styles.categoryTitle}>Lifestyle Information</h2>
-                <div className={styles.lifestyleDetails}>
-                    {data.smokingStatus && (
-                        <div className={styles.lifestyleItem}>
-                            <span className={styles.label}>Smoking Status:</span>
-                            <span className={styles.value}>{data.smokingStatus}</span>
-                        </div>
-                    )}
-                    {data.alcoholConsumption && (
-                        <div className={styles.lifestyleItem}>
-                            <span className={styles.label}>Alcohol Consumption:</span>
-                            <span className={styles.value}>{data.alcoholConsumption}</span>
-                        </div>
-                    )}
-                    {data.exerciseFrequency && (
-                        <div className={styles.lifestyleItem}>
-                            <span className={styles.label}>Exercise Frequency:</span>
-                            <span className={styles.value}>{data.exerciseFrequency}</span>
-                        </div>
-                    )}
-                    {data.dietType && (
-                        <div className={styles.lifestyleItem}>
-                            <span className={styles.label}>Diet Type:</span>
-                            <span className={styles.value}>{data.dietType}</span>
-                        </div>
-                    )}
-                    {data.occupation && (
-                        <div className={styles.lifestyleItem}>
-                            <span className={styles.label}>Occupation:</span>
-                            <span className={styles.value}>{data.occupation}</span>
-                        </div>
-                    )}
-                </div>
-            </div>
-        );
-    };
+    //     return (
+    //         <div className={styles.lifestyleSection}>
+    //             <h2 className={styles.categoryTitle}>Lifestyle Information</h2>
+    //             <div className={styles.lifestyleDetails}>
+    //                 {data.smokingStatus && (
+    //                     <div className={styles.lifestyleItem}>
+    //                         <span className={styles.label}>Smoking Status:</span>
+    //                         <span className={styles.value}>{data.smokingStatus}</span>
+    //                     </div>
+    //                 )}
+    //                 {data.alcoholConsumption && (
+    //                     <div className={styles.lifestyleItem}>
+    //                         <span className={styles.label}>Alcohol Consumption:</span>
+    //                         <span className={styles.value}>{data.alcoholConsumption}</span>
+    //                     </div>
+    //                 )}
+    //                 {data.exerciseFrequency && (
+    //                     <div className={styles.lifestyleItem}>
+    //                         <span className={styles.label}>Exercise Frequency:</span>
+    //                         <span className={styles.value}>{data.exerciseFrequency}</span>
+    //                     </div>
+    //                 )}
+    //                 {data.dietType && (
+    //                     <div className={styles.lifestyleItem}>
+    //                         <span className={styles.label}>Diet Type:</span>
+    //                         <span className={styles.value}>{data.dietType}</span>
+    //                     </div>
+    //                 )}
+    //                 {data.occupation && (
+    //                     <div className={styles.lifestyleItem}>
+    //                         <span className={styles.label}>Occupation:</span>
+    //                         <span className={styles.value}>{data.occupation}</span>
+    //                     </div>
+    //                 )}
+    //             </div>
+    //         </div>
+    //     );
+    // };
 
     return (
         <div>

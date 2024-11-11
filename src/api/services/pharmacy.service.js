@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { authService } from './auth.service';
 export const pharmacyService = {
     searchPharmacy: async (params) => {
+        const token = authService.getAccessToken();
         try {
             const queryString = new URLSearchParams({
                 name: params.name || '',
@@ -12,7 +14,11 @@ export const pharmacyService = {
                 patientid: params.patientId
             }).toString();
 
-            const response = await axios.get(`/api/pharmacy/search?${queryString}`);
+            const response = await axios.get(`/api/pharmacy/search?${queryString}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             console.log(response.data);
             return response.data;
         } catch (error) {
@@ -23,9 +29,14 @@ export const pharmacyService = {
 
     addPreferredPharmacy: async (patientId, pharmacyCode) => {
         try {
+            const token = authService.getAccessToken();
             const response = await axios.post('/api/patient/addpreferredpharmacy', {
                 PatientId: patientId,
                 Code: pharmacyCode
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             console.log(response.data);
             return response.data;
@@ -37,7 +48,12 @@ export const pharmacyService = {
 
     getPreferredPharmacy: async (patientId) => {
         try {
-            const response = await axios.get(`/api/patient/GetPreferredPharmacy?patientId=${patientId}`);
+            const token = authService.getAccessToken();
+            const response = await axios.get(`/api/patient/GetPreferredPharmacy?patientId=${patientId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             return response.data;
         } catch (error) {
             console.error('Error in getting preferred pharmacy:', error);

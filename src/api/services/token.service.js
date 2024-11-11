@@ -1,21 +1,11 @@
 import axios from 'axios';
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+
 const getTokenFromServer = async () => {
     try {
-        const formData = new URLSearchParams();
-        formData.append('username', 'pankaj@iosandweb.net');
-        formData.append('password', 'Iosandweb@@54321');
-        formData.append('grant_type', 'password');
-
-        const response = await axios.post('https://stgwbclientapi.azurewebsites.net/Token', 
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
-            }
-        );
-
+        const response = await axios.get(`${BASE_URL}/api/Token`);
+        console.log('got response from token =>>>>>>>>>>>>>>>>>>', response.data.access_token);
         return response.data.access_token;
     } catch (error) {
         console.error('Token fetch error:', error);
@@ -31,7 +21,7 @@ export const tokenService = {
             const token = await getTokenFromServer();
             cachedToken = token;
             if (typeof window !== 'undefined') {
-                localStorage.setItem('AUTH_TOKEN', token);
+                window.localStorage.setItem('STGWB_AUTH_TOKEN', token);
             }
             return token;
         } catch (error) {
@@ -41,21 +31,9 @@ export const tokenService = {
     },
 
     getStoredToken: async () => {
-        // If we have a cached token, return it
-        if (cachedToken) {
-            return cachedToken;
-        }
-
-        // If we're in the browser
         if (typeof window !== 'undefined') {
-            const token = localStorage.getItem('AUTH_TOKEN');
-            if (token) {
-                cachedToken = token;
-                return token;
-            }
+            return window.localStorage.getItem('STGWB_AUTH_TOKEN');
         }
-        
-        // If no token found, get a new one
-        return await tokenService.getAuthToken();
+        return null;
     }
 }; 

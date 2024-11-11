@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import styles from './EditProfileComponent.module.css';
 import Input from '../Input';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { patientService } from '../../api/services/patient.service';
+import { authService } from '../../api/services/auth.service';
+import axios from 'axios';
 
 function EditProfileComponent() {
     const [relation, setRelation] = useState('');
@@ -20,11 +23,137 @@ function EditProfileComponent() {
     const [guardianFirstName, setGuardianFirstName] = useState('');
     const [guardianLastName, setGuardianLastName] = useState('');
     const [guardianDateOfBirth, setGuardianDateOfBirth] = useState('');
+    const [errors, setErrors] = useState({});
+    const [isValidatingLocation, setIsValidatingLocation] = useState(false);
+    const [apiError, setApiError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
+    // Add phone formatting functions
+    const formatPhoneNumber = (value) => {
+        if (!value) return value;
+        const phoneNumber = value.replace(/[^\d]/g, '');
+        if (phoneNumber.length < 4) return phoneNumber;
+        if (phoneNumber.length < 7) {
+            return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+        }
+        return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+    };
+
+    const handleCellPhoneChange = (e) => {
+        const formattedNumber = formatPhoneNumber(e.target.value);
+        if (formattedNumber.length <= 14) {
+            setCellPhone(formattedNumber);
+        }
+    };
+
+    const handleHomePhoneChange = (e) => {
+        const formattedNumber = formatPhoneNumber(e.target.value);
+        if (formattedNumber.length <= 14) {
+            setHomePhone(formattedNumber);
+        }
+    };
+
+    // Add location validation
+    const validateZipCodeAndCity = async (zipcode, city) => {
+        try {
+            setIsValidatingLocation(true);
+            const response = await axios.post('https://alturahc.com/wp-json/zipcode-validator/v1/check', {
+                zip: zipcode,
+                city: city,
+            });
+
+            if (response.status === 200 && response.data.valid) {
+                return true;
+            } else {
+                setErrors(prev => ({
+                    ...prev,
+                    zipcode: 'Zipcode does not match the city',
+                    city: 'City does not match the zipcode'
+                }));
+                return false;
+            }
+        } catch (error) {
+            console.error('Zipcode validation error:', error);
+            setErrors(prev => ({
+                ...prev,
+                zipcode: 'Error validating location',
+                city: 'Error validating location'
+            }));
+            return false;
+        } finally {
+            setIsValidatingLocation(false);
+        }
+    };
+
+    const handleSave = async () => {
+        // Clear previous messages
+        setErrors({});
+        setApiError('');
+        setSuccessMessage('');
+
+        // Validate zipcode and city
+        const isLocationValid = await validateZipCodeAndCity(zipcode, city);
+        if (!isLocationValid) {
+            return;
+        }
+
+        try {
+            const user = authService.getCurrentUser();
+
+            const patientData = {
+                ID: user.patientId,
+                FirstName: firstName,
+                LastName: lastName,
+                Email: user.email,
+                VendorId: 59,
+                Gender: gender.charAt(0).toUpperCase(),
+                DateOfBirth: new Date(dateOfBirth).toLocaleDateString('en-US'),
+                PhoneNo: '+1' + cellPhone.replace(/\D/g, ''),
+                Address1: address1,
+                Address2: address2 || '',
+                City: city,
+                State: state,
+                Zipcode: zipcode,
+                AccountType: 2
+            };
+
+            const response = await patientService.createPatient(patientData);
+
+            if (typeof response === 'number') {
+                setSuccessMessage('Profile edited successfully');
+                setApiError('');
+            } else {
+                setApiError('Unexpected response from server');
+            }
+        } catch (error) {
+            console.log('Error updating profile:', error);
+
+            // Handle 400 errors and other error cases
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                if (error.response.status === 400) {
+                    // Get the error message from the response
+                    const errorMessage = error.response.data.Message ||
+                        'Unable to update profile. Please check your information.';
+                    setApiError(errorMessage);
+                } else {
+                    setApiError('An error occurred while updating the profile. Please try again.');
+                }
+            } else if (error.request) {
+                // The request was made but no response was received
+                setApiError('Unable to connect to the server. Please check your internet connection.');
+            } else {
+                // Something happened in setting up the request
+                setApiError('An unexpected error occurred. Please try again.');
+            }
+        }
+    };
 
     return (
         <div className={styles.container}>
             <div className={styles.formContainer}>
-                <div className={styles.profileSection}>
+                {/* <div className={styles.profileSection}>
                     <div className={styles.profilePicture}>
                         <div className={styles.avatarPlaceholder}></div>
                     </div>
@@ -37,10 +166,21 @@ function EditProfileComponent() {
                         />
                         Change Profile Picture
                     </button>
-                </div>
+                </div> */}
 
                 <div className={styles.formSection}>
                     <form className={styles.form}>
+                        {/* {apiError && (
+                            <div className={styles.apiError}>
+                                <Image
+                                    src="/assets/icons/error.png"
+                                    alt="Error"
+                                    width={20}
+                                    height={20}
+                                />
+                                <span>{apiError}</span>
+                            </div>
+                        )} */}
 
                         <div className={styles.formRow}>
                             <Input
@@ -67,8 +207,8 @@ function EditProfileComponent() {
                                 onChange={(e) => setDateOfBirth(e.target.value)}
                                 className={styles.inputField}
                             />
-                            <select 
-                                className={styles.select} 
+                            <select
+                                className={styles.select}
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
                             >
@@ -137,7 +277,7 @@ function EditProfileComponent() {
                         />
 
                         <div className={styles.buttonContainer}>
-                            <button type="button" className={styles.saveButton}>
+                            <button type="button" className={styles.saveButton} onClick={handleSave}>
                                 <Image
                                     src="/assets/icons/save.png"
                                     alt="Save"
@@ -146,9 +286,9 @@ function EditProfileComponent() {
                                 />
                                 Save
                             </button>
-                            <button type="submit" className={styles.sendButton}>
+                            {/* <button type="submit" className={styles.sendButton}>
                                 Send Invitation →
-                            </button>
+                            </button> */}
                         </div>
                     </form>
                 </div>

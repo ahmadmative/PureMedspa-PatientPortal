@@ -1,6 +1,6 @@
 import axios from 'axios';
 import cors from '../middleware/cors'
-import { tokenService } from '../../../api/services/token.service';
+
 
 export default async function handler(req, res) {
     await cors(req, res)
@@ -8,9 +8,8 @@ export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Method not allowed' });
     }
-
     try {
-        const token = await tokenService.getAuthToken();
+        const token = req.headers.authorization?.split(' ')[1]
         const response = await axios.post(
             'https://stgwbclientapi.azurewebsites.net/api/encounter/create',
             req.body,
@@ -21,7 +20,7 @@ export default async function handler(req, res) {
                 }
             }
         );
-
+    
         return res.status(200).json(response.data);
     } catch (error) {
         console.error('API Error:', error.response?.data || error.message);

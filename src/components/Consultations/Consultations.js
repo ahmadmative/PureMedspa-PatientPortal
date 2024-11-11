@@ -14,42 +14,42 @@ const Consultations = () => {
     
     const router = useRouter();
 
-    // useEffect(() => {
-    //     const fetchConsultations = async () => {
-    //         try {
-    //             setLoading(true);
-    //             const user = authService.getCurrentUser();
+    useEffect(() => {
+        const fetchConsultations = async () => {
+            try {
+                setLoading(true);
+                const user = authService.getCurrentUser();
                 
-    //             if (!user) {
-    //                 throw new Error('Patient ID not found');
-    //             }
+                if (!user) {
+                    throw new Error('Patient ID not found');
+                }
 
-    //             const data = await encounterService.getEncounters(parseInt(user.patient_id));
+                const data = await encounterService.getEncounters(parseInt(user.patient_id));
                 
-    //             // Format the data to match our component's needs
-    //             const formattedConsultations = data.map(encounter => ({
-    //                 id: encounter.ID,
-    //                 condition: encounter.Reason.Title,
-    //                 type: encounter.Type,
-    //                 date: new Date(encounter.Date).toLocaleDateString(),
-    //                 time: new Date(encounter.Date).toLocaleTimeString([], { 
-    //                     hour: '2-digit', 
-    //                     minute: '2-digit' 
-    //                 }),
-    //                 status: encounter.Status
-    //             }));
+                // Format the data to match our component's needs
+                const formattedConsultations = data.map(encounter => ({
+                    id: encounter.ID,
+                    condition: encounter.Reason.Title,
+                    type: encounter.Type,
+                    date: new Date(encounter.Date).toLocaleDateString(),
+                    time: new Date(encounter.Date).toLocaleTimeString([], { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    }),
+                    status: encounter.Status
+                }));
 
-    //             setConsultations(formattedConsultations);
-    //         } catch (error) {
-    //             console.error('Error fetching consultations:', error);
-    //             setError('Failed to load consultations');
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
+                setConsultations(formattedConsultations);
+            } catch (error) {
+                console.error('Error fetching consultations:', error);
+                setError('Failed to load consultations');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    //     fetchConsultations();
-    // }, []);
+        fetchConsultations();
+    }, []);
 
     const handleRequestConsultationClick = () => {
         router.push('/consultation');

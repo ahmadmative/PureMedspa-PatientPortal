@@ -56,3 +56,15 @@
   color: #6B7280;
   font-size: 14px;
 } 
+
+.noConsultations {
+  font-size: 16px;
+  font-weight: 500;
+  color: #808080;
+} 
+
+.status {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6B7280;
+}

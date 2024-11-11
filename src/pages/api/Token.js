@@ -1,33 +1,28 @@
 import axios from 'axios';
-import cors from '../middleware/cors'
+import cors from './middleware/cors'
 
 export default async function handler(req, res) {
-    await cors(req, res)
+    await cors(req, res);
 
     if (req.method !== 'GET') {
         return res.status(405).json({ message: 'Method not allowed' });
     }
 
-    const { patientId } = req.query;
-
-    if (!patientId) {
-        return res.status(400).json({ message: 'Patient ID is required' });
-    }
-
     try {
-        const token = req.headers.authorization?.split(' ')[1]
+        const formData = new URLSearchParams();
+        formData.append('username', 'pankaj@iosandweb.net');
+        formData.append('password', 'Iosandweb@@54321');
+        formData.append('grant_type', 'password');
 
-        const response = await axios.get(
-            `https://stgwbclientapi.azurewebsites.net/api/patient/LifeStyle?patientId=${patientId}&encounterId=0`,
+        const response = await axios.post(
+            'https://stgwbclientapi.azurewebsites.net/Token',
+            formData,
             {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 }
             }
         );
-    
-
         return res.status(200).json(response.data);
     } catch (error) {
         console.error('API Error:', error.response?.data || error.message);

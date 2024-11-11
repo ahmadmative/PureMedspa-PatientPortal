@@ -1,6 +1,6 @@
 import axios from 'axios';
 import cors from '../middleware/cors'
-import { tokenService } from '../../../api/services/token.service';
+
 
 
 export default async function handler(req, res) {
@@ -13,16 +13,24 @@ export default async function handler(req, res) {
     const { Name } = req.query;
 
     try {
-        const token = await tokenService.getAuthToken();
-        const response = await axios.get(
-            `https://stgwbclientapi.azurewebsites.net/api/allergy/search?Name=${Name}`,
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
+        const token = req.headers.authorization?.split(' ')[1]
+
+        if(!token)
+        {
+            alert('No token found');
+        }
+        else{
+            const response = await axios.get(
+                `https://stgwbclientapi.azurewebsites.net/api/allergy/search?Name=${Name}`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
                 }
-            }
-        );
+            );
+        }
+        
 
         return res.status(200).json(response.data);
     } catch (error) {

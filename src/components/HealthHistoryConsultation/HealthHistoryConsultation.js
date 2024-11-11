@@ -45,13 +45,27 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
     const [allergies, setAllergies] = useState([]);
     const [loadingAllergies, setLoadingAllergies] = useState(false);
 
+    const [renderMedications, setRenderMedications] = useState(false);
+    const [renderAllergies, setRenderAllergies] = useState(false);
+
     useEffect(() => {
-        fetchMedications();
-        fetchAllergies();
+        const delayMedications = setTimeout(() => setRenderMedications(true), 500); // 500ms delay
+        const delayAllergies = setTimeout(() => setRenderAllergies(true), 1000); // 1000ms delay
+      
+        return () => {
+          clearTimeout(delayMedications);
+          clearTimeout(delayAllergies);
+        };
     }, []);
+
+    useEffect(() => {
+        renderMedications && fetchMedications();
+        renderAllergies && fetchAllergies();
+    }, [renderMedications, renderAllergies]);
 
     const fetchMedications = async () => {
         try {
+            console.log("fetchMedications");
             setLoadingMedications(true);
             const user = authService.getCurrentUser();
             if (!user) {
@@ -69,6 +83,7 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete }) => {
 
     const fetchAllergies = async () => {
         try {
+            console.log("fetchAllergies");
             setLoadingAllergy(true);
             const user = authService.getCurrentUser();
             if (!user) {

@@ -106,7 +106,7 @@ function AddSpouse() {
                 FirstName: firstName,
                 LastName: lastName,
                 Email: email,
-                VendorId: 66,
+                VendorId: 59,
                 Gender: gender.charAt(0).toUpperCase(),
                 DateOfBirth: new Date(dateOfBirth).toLocaleDateString('en-US'),
                 PhoneNo: '+1' + cellPhone.replace(/\D/g, ''),
@@ -122,9 +122,35 @@ function AddSpouse() {
             console.log('patientData:', patientData);
 
             const response = await patientService.createPatient(patientData);
-            // Handle success
+
+            // Check if response is a number (patient ID)
+            if (typeof response === 'number') {
+                // Show success message
+                setApiError(''); // Clear any existing errors
+                alert('Family member added successfully');
+
+                setRelation('');
+                setEmail('');
+                setFirstName('');
+                setLastName('');
+                setDateOfBirth('');
+                setGender('');
+                setAddress1('');
+                setAddress2('');
+                setZipcode('');
+                setCity('');
+                setState('');
+                setCellPhone('');
+                setHomePhone('');
+                setGuardianFirstName('');
+                setGuardianLastName('');
+                setGuardianDateOfBirth('');
+                setErrors({});
+            } else {
+                setApiError('Unexpected response from server');
+            }
         } catch (error) {
-            console.error('Error creating family member:', error);
+            console.log('Error creating family member:', error);
             
             // Handle 400 errors and other error cases
             if (error.response) {

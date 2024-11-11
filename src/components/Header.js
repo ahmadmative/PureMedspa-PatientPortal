@@ -10,6 +10,9 @@ export default function Header({ userName, userType, image, showLogo, onMenuClic
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
 
+  // Add check for signup page
+  const isSignupPage = router.pathname === '/payment';
+
   const handleUserSectionClick = () => {
     setShowDropdown(!showDropdown);
   };
@@ -59,55 +62,57 @@ export default function Header({ userName, userType, image, showLogo, onMenuClic
         )}
       </div>
 
-      <div className={styles.userSection}>
-        <div className={styles.notificationIcon}>
-          <Image
-            src={bellIcon}
-            alt="Notifications"
-            width={24}
-            height={24}
-            priority
-          />
-          <span className={styles.notificationBadge}>2</span>
-        </div>
-        <div className={styles.userInfo} onClick={handleUserSectionClick}>
-          <div className={styles.profilePic}>
-            <div className={styles.avatarContainer}>
-              {image ? (
-                <img 
-                  src={image} 
-                  alt={userName || 'User profile'} 
-                  className={styles.avatarImage}
-                />
-              ) : (
-                <div className={styles.avatarPlaceholder}>
-                  {userName?.charAt(0) || 'U'}
-                </div>
-              )}
-            </div>
-          </div>
-          <div className={styles.userDetails}>
-            <span className={styles.userName}>{userName}</span>
-            <span className={styles.userType}>
-              {userType} <span className={styles.dropdownArrow}>▼</span>
-            </span>
-          </div>
-
-          {showDropdown && (
-            <div className={styles.dropdown}>
-              <div className={styles.dropdownItem} onClick={handleLogout}>
-                <Image
-                  src="/assets/icons/logoutIcon.png"
-                  alt="Logout"
-                  width={20}
-                  height={20}
-                />
-                <span>Logout</span>
+      {!isSignupPage && (
+        <div className={styles.userSection}>
+          {/* <div className={styles.notificationIcon}>
+            <Image
+              src={bellIcon}
+              alt="Notifications"
+              width={24}
+              height={24}
+              priority
+            />
+            <span className={styles.notificationBadge}>2</span>
+          </div> */}
+          <div className={styles.userInfo} onClick={handleUserSectionClick}>
+            <div className={styles.profilePic}>
+              <div className={styles.avatarContainer}>
+                {image ? (
+                  <img 
+                    src={image} 
+                    alt={userName || 'User profile'} 
+                    className={styles.avatarImage}
+                  />
+                ) : (
+                  <div className={styles.avatarPlaceholder}>
+                    {userName?.charAt(0) || 'U'}
+                  </div>
+                )}
               </div>
             </div>
-          )}
+            <div className={styles.userDetails}>
+              <span className={styles.userName}>{userName}</span>
+              <span className={styles.userType}>
+                {userType} <span className={styles.dropdownArrow}>▼</span>
+              </span>
+            </div>
+
+            {showDropdown && (
+              <div className={styles.dropdown}>
+                <div className={styles.dropdownItem} onClick={handleLogout}>
+                  <Image
+                    src="/assets/icons/logoutIcon.png"
+                    alt="Logout"
+                    width={20}
+                    height={20}
+                  />
+                  <span>Logout</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 } 

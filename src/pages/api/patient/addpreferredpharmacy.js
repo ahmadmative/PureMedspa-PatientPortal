@@ -1,6 +1,5 @@
 import axios from 'axios';
 import cors from '../middleware/cors'
-import { tokenService } from '../../../api/services/token.service';
 
 export default async function handler(req, res) {
     await cors(req, res)
@@ -16,7 +15,10 @@ export default async function handler(req, res) {
     }
 
     try {
-        const token = await tokenService.getAuthToken();
+               
+        const token = req.headers.authorization?.split(' ')[1]
+       
+       
         const response = await axios.post(
             'https://stgwbclientapi.azurewebsites.net/api/patient/addpreferredpharmacy',
             {
@@ -30,6 +32,7 @@ export default async function handler(req, res) {
                 }
             }
         );
+    
 
         return res.status(200).json(response.data);
     } catch (error) {

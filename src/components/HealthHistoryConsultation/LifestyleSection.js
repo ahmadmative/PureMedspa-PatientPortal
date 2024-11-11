@@ -35,7 +35,7 @@ const LifestyleSection = () => {
         try {
             setLoading(true);
 
-            // Get PatientId from localStorage
+            // Get PatientId from window.localStorage
             const user = authService.getCurrentUser();
 
             console.log('Patient ID:', user.patient_id);
@@ -47,7 +47,7 @@ const LifestyleSection = () => {
             else{
                 const lifestyleData = {
                     PatientId: parseInt(user.patient_id),
-                    Height: feet * 12 + inches,
+                    Height: feet,
                     Weight: weight,
                     IsSmoke: smoke === 'yes' ? "1" : "0",
                     EncounterId: "0"

@@ -23,7 +23,7 @@ const axiosInstance = axios.create({
 // Add request interceptor for auth instance
 axiosAuthInstance.interceptors.request.use(
     (config) => {
-        const backendToken = localStorage.getItem('AUTH_TOKEN_BACKEND');
+        const backendToken = window.localStorage.getItem('AUTH_TOKEN_BACKEND');
         if (backendToken) {
             config.headers.Authorization = `Bearer ${backendToken}`;
         }

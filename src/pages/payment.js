@@ -225,6 +225,8 @@ function SignupForm() {
                         setPaymentResponse(paymentDetails);
 
                         await createPatient();
+
+                        // router.push('/');
                     }
 
                 } catch (error) {
@@ -262,7 +264,7 @@ function SignupForm() {
             const response = await patientService.createPatient(patientData);
 
             if (typeof response === 'number' && response > 0) {
-                localStorage.setItem(PATIENT_ID_KEY, response.toString());
+                window.localStorage.setItem(PATIENT_ID_KEY, response.toString());
 
                 // Create FormData for the second API
                 const formData2 = new FormData();
@@ -279,8 +281,8 @@ function SignupForm() {
                 formData2.append('email', formData.email);
                 formData2.append('patient_id', response.toString());
                 formData2.append('payment_id', paymentResponse?.payment_id || '');
-                formData2.append('amount', paymentResponse?.amount || '');
-                formData2.append('plan_id', paymentResponse?.subscription_id || '');
+                formData2.append('amount', data?.Subscription_plan.price || '');
+                formData2.append('plan_id', data?.Subscription_plan.id || '');
 
                 for (const [key, value] of formData2.entries()) {
                     console.log(`${key}: ${value}`);
@@ -655,7 +657,7 @@ function SignupForm() {
                         <Button
                             onClick={() => {
                                 setShowModal(false);
-                                router.push('/dashboard');
+                                router.push('/');
                             }}
                             width="50%"
                         >
@@ -669,7 +671,7 @@ function SignupForm() {
 }
 
 // Main component that wraps SignupForm with Elements
-export default function Signup() {
+export default function Payment() {
     return (
         <Elements stripe={stripePromise}>
             <SignupForm />

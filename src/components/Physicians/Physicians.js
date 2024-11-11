@@ -2,8 +2,9 @@ import Image from 'next/image';
 import styles from './Physicians.module.css';
 import { physicianService } from '../../api/services/physician.service';
 import { useState, useEffect } from 'react';
+import { authService } from '../../api/services/auth.service';
 
-const Physicians = ({ patientId }) => {
+const Physicians = () => {
     const [physicianInfo, setPhysicianInfo] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -12,7 +13,12 @@ const Physicians = ({ patientId }) => {
         const fetchPhysician = async () => {
             try {
                 setLoading(true);
-                const data = await physicianService.getPrimaryPhysician(patientId);
+                const user = authService.getCurrentUser();
+                
+                if (!user) {
+                    throw new Error('Patient ID not found');
+                }
+                const data = await physicianService.getPrimaryPhysician(user.patient_id);
                 setPhysicianInfo(data);
                 console.log('physician info', data);
             } catch (err) {
@@ -23,10 +29,8 @@ const Physicians = ({ patientId }) => {
             }
         };
 
-        if (patientId) {
-            fetchPhysician();
-        }
-    }, [patientId]);
+        fetchPhysician();
+    }, []);
 
     // if (!physicianInfo || loading) return <div>No Physician Information Available</div>;
 
