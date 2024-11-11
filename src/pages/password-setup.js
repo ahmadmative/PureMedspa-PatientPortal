@@ -25,12 +25,20 @@ export default function PasswordSetup() {
     if (router.isReady && token) {
       try {
         // Decode the token if it's URI encoded
-        const decoded = decodeURIComponent(token);
+        let decoded = decodeURIComponent(token);
+        
+        // Remove leading dot if it exists
+        if (decoded.startsWith('.')) {
+          decoded = decoded.substring(1);
+        }
+        
         setDecodedToken(decoded);
         console.log('Decoded token:', decoded);
       } catch (error) {
         console.error('Error decoding token:', error);
-        setDecodedToken(token); // Use original token if decoding fails
+        // If original token starts with dot, remove it
+        const cleanToken = token.startsWith('.') ? token.substring(1) : token;
+        setDecodedToken(cleanToken);
       }
     } else if (router.isReady && !token) {
       router.push('/forgot-password');
@@ -101,7 +109,7 @@ export default function PasswordSetup() {
         />
       </div>
       <div className={styles.formContainer}>
-        <h1 className={styles.title}>Reset Password</h1>
+        <h1 className={styles.title}>Set Password</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.passwordContainer}>
             <Input
@@ -152,7 +160,7 @@ export default function PasswordSetup() {
           </div>
 
           <Button type="submit" width="70%">
-            RESET PASSWORD
+            SET PASSWORD
           </Button>
         </form>
       </div>
