@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { authService } from './auth.service';
+import { tokenService } from './token.service';
 
 export const patientService = {
     createPatient: async (patientData) => {
         try {
-            const token = authService.getAccessToken();
+            const token = await tokenService.getAuthToken();
+            console.log('Token:', token);
             const response = await axios.post('/api/patient/createpatient', patientData, {
                 headers: {
                     'Authorization': `Bearer ${token}`
