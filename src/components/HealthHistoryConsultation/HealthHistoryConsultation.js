@@ -52,8 +52,8 @@ const HealthHistoryConsultation = ({ currentMedications, onComplete, continueFal
     const [deletingAllergyId, setDeletingAllergyId] = useState(null);
 
     useEffect(() => {
-        const delayMedications = setTimeout(() => setRenderMedications(true), 500); // 500ms delay
-        const delayAllergies = setTimeout(() => setRenderAllergies(true), 1000); // 1000ms delay
+        const delayMedications = setTimeout(() => setRenderMedications(true), 1000); // 500ms delay
+        const delayAllergies = setTimeout(() => setRenderAllergies(true), 2000); // 1000ms delay
       
         return () => {
           clearTimeout(delayMedications);
