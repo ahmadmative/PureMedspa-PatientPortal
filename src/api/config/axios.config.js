@@ -13,7 +13,7 @@ const axiosAuthInstance = axios.create({
 
 // Create instance for main API
 const axiosInstance = axios.create({
-    baseURL: 'https://stgwbclientapi.azurewebsites.net',
+    baseURL: 'https://wbclientapi.webdoctors.com',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json'

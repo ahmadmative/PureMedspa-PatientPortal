@@ -10,12 +10,12 @@ export default async function handler(req, res) {
 
     try {
         const formData = new URLSearchParams();
-        formData.append('username', 'pankaj@iosandweb.net');
-        formData.append('password', 'Iosandweb@@54321');
+        formData.append('username', 'medspaintegration@mailinator.com');
+        formData.append('password', 'WebDoctor@54321');
         formData.append('grant_type', 'password');
 
         const response = await axios.post(
-            'https://stgwbclientapi.azurewebsites.net/Token',
+            'https://wbclientapi.webdoctors.com/Token',
             formData,
             {
                 headers: {

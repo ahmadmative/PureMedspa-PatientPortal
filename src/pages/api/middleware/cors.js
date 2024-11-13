@@ -17,7 +17,7 @@ const cors = initMiddleware(
   Cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     origin: [
-      'https://stgwbclientapi.azurewebsites.net',
+      'https://wbclientapi.webdoctors.com',
       'http://localhost:3000',
     ],
     credentials: true,

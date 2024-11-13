@@ -9,7 +9,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://stgwbclientapi.azurewebsites.net/:path*',
+        destination: 'https://wbclientapi.webdoctors.com/:path*',
       },
     ];
   }

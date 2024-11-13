@@ -18,7 +18,7 @@ export default async function handler(req, res) {
         console.log("req.body in lifestyle.js", req.body);
         console.log("token in lifestyle.js", token);
         const response = await axios.post(
-            'https://stgwbclientapi.azurewebsites.net/api/patient/lifestyle',
+            'https://wbclientapi.webdoctors.com/api/patient/lifestyle',
             req.body,
             {
                 headers: {

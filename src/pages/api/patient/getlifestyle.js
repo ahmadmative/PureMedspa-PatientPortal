@@ -18,7 +18,7 @@ export default async function handler(req, res) {
         const token = req.headers.authorization?.split(' ')[1]
 
         const response = await axios.get(
-            `https://stgwbclientapi.azurewebsites.net/api/patient/LifeStyle?patientId=${patientId}&encounterId=0`,
+            `https://wbclientapi.webdoctors.com/api/patient/LifeStyle?patientId=${patientId}&encounterId=0`,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`,

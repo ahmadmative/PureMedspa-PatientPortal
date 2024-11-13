@@ -105,7 +105,7 @@ function EditProfileComponent() {
                 FirstName: firstName,
                 LastName: lastName,
                 Email: user.email,
-                VendorId: 59,
+                VendorId: 23,
                 Gender: gender.charAt(0).toUpperCase(),
                 DateOfBirth: new Date(dateOfBirth).toLocaleDateString('en-US'),
                 PhoneNo: '+1' + cellPhone.replace(/\D/g, ''),

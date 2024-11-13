@@ -21,7 +21,7 @@ export default async function handler(req, res) {
        
        
         const response = await axios.get(
-            `https://stgwbclientapi.azurewebsites.net/api/medication/search?Name=${Name}`,
+            `https://wbclientapi.webdoctors.com/api/medication/search?Name=${Name}`,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`,

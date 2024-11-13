@@ -20,7 +20,7 @@ export default async function handler(req, res) {
        
        
         const response = await axios.post(
-            'https://stgwbclientapi.azurewebsites.net/api/patient/addpreferredpharmacy',
+            'https://wbclientapi.webdoctors.com/api/patient/addpreferredpharmacy',
             {
                 PatientId,
                 Code

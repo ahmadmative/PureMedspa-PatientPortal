@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     try {
         const token = req.headers.authorization?.split(' ')[1]
         const response = await axios.post(
-            'https://stgwbclientapi.azurewebsites.net/api/encounter/create',
+            'https://wbclientapi.webdoctors.com/api/encounter/create',
             req.body,
             {
                 headers: {

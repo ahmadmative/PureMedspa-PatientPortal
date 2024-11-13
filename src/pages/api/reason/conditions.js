@@ -17,7 +17,7 @@ export default async function handler(req, res) {
        
        
         const response = await axios.get(
-            'https://stgwbclientapi.azurewebsites.net/api/reason/conditions',
+            'https://wbclientapi.webdoctors.com/api/reason/conditions',
             {
                 headers: {
                     'Authorization': `Bearer ${token}`,

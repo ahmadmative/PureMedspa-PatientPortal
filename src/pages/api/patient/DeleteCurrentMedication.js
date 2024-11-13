@@ -14,7 +14,7 @@ export default async function handler(req, res) {
        
        
         const response = await axios.post(
-            'https://stgwbclientapi.azurewebsites.net/api/patient/DeleteCurrentMedication',
+            'https://wbclientapi.webdoctors.com/api/patient/DeleteCurrentMedication',
             req.body,
             {
                 headers: {

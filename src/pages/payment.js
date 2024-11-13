@@ -260,7 +260,7 @@ function SignupForm() {
                 FirstName: formData.firstName,
                 LastName: formData.lastName,
                 Email: formData.email,
-                VendorId: 66,
+                VendorId: 23,
                 Gender: formData.gender.charAt(0).toUpperCase(),
                 DateOfBirth: new Date(formData.dateOfBirth).toLocaleDateString('en-US'),
                 PhoneNo: '+1' + formData.cellPhone.replace(/\D/g, ''),
@@ -268,7 +268,8 @@ function SignupForm() {
                 Address2: formData.address2 || '',
                 City: formData.city,
                 Zipcode: formData.zipcode,
-                AccountType: 2
+                AccountType: 2,
+                ParentId: 0
             };
 
             const response = await patientService.createPatient(patientData);

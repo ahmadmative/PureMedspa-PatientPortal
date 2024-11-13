@@ -15,7 +15,7 @@ export default async function handler(req, res) {
        
        
         const response = await axios.get(
-            `https://stgwbclientapi.azurewebsites.net/api/pharmacy/search`,
+            `https://wbclientapi.webdoctors.com/api/pharmacy/search`,
             {
                 params: {
                     name: name || '',
