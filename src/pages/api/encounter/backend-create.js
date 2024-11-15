@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         console.log('Backend token:', backendToken);
 
         const response = await axios.post(
-            'https://alturahealth.webjerky.com/api/encounter',
+            'https://puremedspa.alturahc.com/api/encounter',
             formData,
             {
                 headers: {

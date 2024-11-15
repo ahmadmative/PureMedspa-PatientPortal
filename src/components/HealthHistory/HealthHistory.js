@@ -114,7 +114,7 @@ const HealthHistory = ({ patientId }) => {
                     <div className={styles.historyItem}>
                         <h2 className={styles.categoryTitle}>Lifestyle Information</h2>
                         <p className={styles.details}>
-                            Height: {lifestyleData?.Height}, Weight: {lifestyleData?.Weight}, BMI: 123
+                            Height: {lifestyleData?.Height}, Weight: {lifestyleData?.Weight}, BMI: {lifestyleData?.BMI}
                         </p>
 
                         <div className={styles.reportInfo}>

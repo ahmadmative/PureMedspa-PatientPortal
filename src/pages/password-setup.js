@@ -67,7 +67,7 @@ export default function PasswordSetup() {
       console.log('Submitting with token:', decodedToken); // Debug log
 
       const response = await axios.post(
-        'https://alturahealth.webjerky.com/api/password-setup',
+        'https://puremedspa.alturahc.com/api/password-setup',
         formData,
         {
           headers: {

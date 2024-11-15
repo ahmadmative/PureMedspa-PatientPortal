@@ -302,7 +302,7 @@ function SignupForm() {
                 try {
                     // Call the second API
                     const registerResponse = await axios.post(
-                        'https://alturahealth.webjerky.com/api/register',
+                        'https://puremedspa.alturahc.com/api/register',
                         formData2,
                         {
                             headers: {
@@ -435,7 +435,7 @@ function SignupForm() {
                     console.log('Fetching subscription with ID:', id); // Debug log
 
                     const response = await axios.post(
-                        'https://alturahealth.webjerky.com/api/subscription',
+                        'https://puremedspa.alturahc.com/api/subscription',
                         formData,
                         {
                             headers: {

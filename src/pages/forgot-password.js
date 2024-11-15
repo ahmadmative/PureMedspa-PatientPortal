@@ -20,7 +20,7 @@ export default function ForgotPassword() {
       formData.append('email', email);
 
       const response = await axios.post(
-        'https://alturahealth.webjerky.com/api/forgot-password',
+        'https://puremedspa.alturahc.com/api/forgot-password',
         formData,
         {
           headers: {
