@@ -134,7 +134,7 @@ function RequestConsultation() {
         
         // Split data into general care (A) and special situations (S)
         const generalCare = data
-          .filter(item => item.Type === 'A')
+          .filter(item => item.Type === 'A' || item.Type === 'Q' || item.Type === 'R')
           .map(item => ({
             id: item.ID.toString(),
             label: item.Title,
